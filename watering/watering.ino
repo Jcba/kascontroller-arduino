@@ -1,11 +1,42 @@
-//The setup function is called once at startup of the sketch
-void setup()
-{
-// Add your initialization code here
+#include "DHT.h"
+#include "SoilMoisture.h"
+
+#define DHTPIN 2
+#define SOILPIN 16
+
+DHT dht(DHTPIN, DHT11);
+
+SoilMoisture soilMoisture(SOILPIN);
+
+void setup() {
+	Serial.begin(9600);
+	Serial.println("test");
+	dht.begin();
 }
 
-// The loop function is called in an endless loop
-void loop()
-{
-//Add your repeated code here
+void loop() {
+	delay(2000);
+
+	// Reading temperature or humidity takes about 250 milliseconds!
+	// Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
+	float h = dht.readHumidity();
+	// Read temperature as Celsius (the default)
+	float t = dht.readTemperature();
+
+	float moisture = soilMoisture.readMoisture();
+
+	// Check if any reads failed and exit early (to try again).
+	if (isnan(h) || isnan(t)) {
+		Serial.println("Failed to read from DHT sensor!");
+		return;
+	}
+
+	Serial.print("Humidity: ");
+	Serial.print(h);
+	Serial.print(" %\t");
+	Serial.print("Temperature: ");
+	Serial.print(t);
+	Serial.print(" *C ");
+	Serial.print("Moisture: ");
+	Serial.println(moisture);
 }
