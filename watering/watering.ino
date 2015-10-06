@@ -1,12 +1,18 @@
 #include "DHT.h"
 #include "SoilMoisture.h"
 #include "ControlBoardPins.h"
+#include "Configuration.h"
 
 DHT dht(DHT_SENSOR_PIN, DHT11);
 
 SoilMoisture soilMoisture(SOIL_SENSOR_PIN);
 
+Network network(RX_PIN, TX_PIN, NETWORK_ENABLE_PIN);
+
+unsigned long lastNetworkUpdate;
+
 void setup() {
+	lastNetworkUpdate = millis();
 	Serial.begin(9600);
 	Serial.println("test");
 	dht.begin();
@@ -37,4 +43,20 @@ void loop() {
 	Serial.print(" *C ");
 	Serial.print("Moisture: ");
 	Serial.println(moisture);
+	
+	if(millis() - lastNetworkUpdate > NETWORK_UPDATE_INTERVAL) {
+		informServer(humidity, temperature, moisture);
+		lastNetworkUpdate = millis();
+	}
+	
+}
+
+void informServer(float humidity, float temperature, float moisture) {
+	network.enable();
+	network.connect(NETWORK_ADDRESS);
+	network.sendJson("{humidity:"+String(humidity, PRESENTATION_FLOAT_DECIMALS)+
+		",temperature:"+String(temperature, PRESENTATION_FLOAT_DECIMALS)+
+		",moisture:"+String(moisture, PRESENTATION_FLOAT_DECIMALS)+
+		"}");
+	network.disable();
 }
