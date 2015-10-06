@@ -1,12 +1,10 @@
 #include "DHT.h"
 #include "SoilMoisture.h"
+#include "ControlBoardPins.h"
 
-#define DHTPIN 2
-#define SOILPIN 16
+DHT dht(DHT_SENSOR_PIN, DHT11);
 
-DHT dht(DHTPIN, DHT11);
-
-SoilMoisture soilMoisture(SOILPIN);
+SoilMoisture soilMoisture(SOIL_SENSOR_PIN);
 
 void setup() {
 	Serial.begin(9600);
