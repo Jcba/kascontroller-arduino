@@ -1,3 +1,5 @@
-#define NETWORK_ADDRESS 192.168.1.120
+#define NETWORK_ADDRESS "192.168.1.120"
 #define PRESENTATION_FLOAT_DECIMALS 2
-#define NETWORK_UPDATE_INTERVAL = 60 * 60 * 1000 // update once every hour
+#define NETWORK_UPDATE_INTERVAL 60ul * 60ul * 1000ul // update once every hour
+#define MOISTURE_THRESHOLD 30 //percent
+#define MIN_PUMP_INTERVAL 1000ul // once every second

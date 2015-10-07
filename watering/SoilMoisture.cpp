@@ -12,7 +12,7 @@ SoilMoisture::SoilMoisture(uint8_t pin) {
 }
 
 float SoilMoisture::readMoisture() {
-	return 1.0-(analogRead(_pin)/(float)1023);
+	return (1.0-(analogRead(_pin)/(float)1023))*100;
 }
 
 

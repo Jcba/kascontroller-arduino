@@ -5,27 +5,29 @@
  *      Author: Job Bakker
  */
  
- #include "Network.h"
+#include "Network.h"
+#include "ESP8266.h"
  
- Network::Network(uint8_t rx, uint8_t tx, uint8_t enable_pin) {
+ Network::Network(uint8_t rx, uint8_t tx, uint8_t enable_pin, HardwareSerial serial) {
      _enable_pin = enable_pin;
      pinMode(_enable_pin, OUTPUT);
      _rx = rx;
      _tx = tx;
+     _esp = new ESP8266(serial);
  }
  
  void Network::enable() {
-     digitalWrite(enable_pin, HIGH);
+     digitalWrite(_enable_pin, HIGH);
  }
  
  void Network::disable() {
-     digitalWrite(enable_pin, LOW);
+     digitalWrite(_enable_pin, LOW);
  }
  
- void Network::connect(char* address) {
+ void Network::connect(String address) {
      
  }
  
- void Network::sendJson(char* json) {
+ void Network::sendJson(String json) {
  
  }

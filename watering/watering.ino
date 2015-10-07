@@ -2,17 +2,23 @@
 #include "SoilMoisture.h"
 #include "ControlBoardPins.h"
 #include "Configuration.h"
+#include "Network.h"
+#include "Pump.h"
 
 DHT dht(DHT_SENSOR_PIN, DHT11);
 
 SoilMoisture soilMoisture(SOIL_SENSOR_PIN);
 
-Network network(RX_PIN, TX_PIN, NETWORK_ENABLE_PIN);
+Network network(RX_PIN, TX_PIN, NETWORK_ENABLE_PIN, Serial);
+
+Pump waterPump(10);
 
 unsigned long lastNetworkUpdate;
+unsigned long lastPumpAction;
 
 void setup() {
 	lastNetworkUpdate = millis();
+	lastPumpAction = millis();
 	Serial.begin(9600);
 	Serial.println("test");
 	dht.begin();
@@ -45,10 +51,15 @@ void loop() {
 	Serial.println(moisture);
 	
 	if(millis() - lastNetworkUpdate > NETWORK_UPDATE_INTERVAL) {
-		informServer(humidity, temperature, moisture);
+		informServer(h, t, moisture);
 		lastNetworkUpdate = millis();
 	}
 	
+	if(moisture < MOISTURE_THRESHOLD and (millis() - lastPumpAction) > MIN_PUMP_INTERVAL) {
+		waterPump.giveWater(10);
+		lastPumpAction = millis();
+	}
+
 }
 
 void informServer(float humidity, float temperature, float moisture) {

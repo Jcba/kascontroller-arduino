@@ -16,9 +16,11 @@
  #include "WProgram.h"
 #endif
 
+#include "ESP8266.h"
+
 class Network {
 public:
-	Network(uint8_t rx, uint8_t tx, uint8_t enable_pin);
+	Network(uint8_t rx, uint8_t tx, uint8_t enable_pin, HardwareSerial serial);
 	/* enables the network interface */
 	void enable();
 	/* disables the network interface */
@@ -26,14 +28,15 @@ public:
 	/* sets up a connection with a receiving host (a fixed IP where a server
 	    is listening)
 	 */
-	void connect(char* reciever);
+	void connect(String reciever);
 	/* sends a JSON string to the reciever */
-	void sendJson(char* json);
+	void sendJson(String json);
 
 private:
 	uint8_t _rx; //rx pin
 	uint8_t _tx; //tx pin
 	uint8_t _enable_pin;
+	ESP8266* _esp;
 };
 
 
