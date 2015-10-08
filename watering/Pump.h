@@ -16,7 +16,9 @@
 
 class Pump {
 public:
+	//instantiate a pump with L298N interfacing pins
 	Pump(uint8_t pwm, uint8_t in1, uint8_t in2);
+
 	void giveWater(float amount);
 
 private:

@@ -4,6 +4,7 @@
 #include "Configuration.h"
 #include "Network.h"
 #include "Pump.h"
+#include "Display.h"
 
 DHT dht(DHT_SENSOR_PIN, DHT11);
 
@@ -62,12 +63,16 @@ void loop() {
 
 }
 
+/**
+ * Simple inform server method which informs a listening server listening on NETWORK_ADDRESS of
+ * read sensor values in JSON format
+ */
 void informServer(float humidity, float temperature, float moisture) {
-	network.enable();
+	network.enable(); // this can take a while (needs to boot and reconnect to server)
 	network.connect(NETWORK_ADDRESS);
 	network.sendJson("{humidity:"+String(humidity, PRESENTATION_FLOAT_DECIMALS)+
 		",temperature:"+String(temperature, PRESENTATION_FLOAT_DECIMALS)+
 		",moisture:"+String(moisture, PRESENTATION_FLOAT_DECIMALS)+
 		"}");
-	network.disable();
+	network.disable(); // save energy (turns network interface off)
 }
