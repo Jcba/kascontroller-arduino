@@ -16,4 +16,8 @@
 #define SOIL_SENSOR_PIN 16
 #define NETWORK_ENABLE_PIN 5 //dummy value
 
+#define MOTOR_ENA 9 //should be a PWM pin
+#define MOTOR_IN1 8
+#define MOTOR_IN2 7
+
 #endif //CONTROLBOARDPINS_H_

@@ -16,11 +16,13 @@
 
 class Pump {
 public:
-	Pump(uint8_t pin);
+	Pump(uint8_t pwm, uint8_t in1, uint8_t in2);
 	void giveWater(float amount);
 
 private:
-	uint8_t _pin;
+	uint8_t _pwm;
+	uint8_t _in1;
+	uint8_t _in2;
 
 };
 

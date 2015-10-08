@@ -11,7 +11,7 @@ SoilMoisture soilMoisture(SOIL_SENSOR_PIN);
 
 Network network(RX_PIN, TX_PIN, NETWORK_ENABLE_PIN, Serial);
 
-Pump waterPump(10);
+Pump waterPump(MOTOR_ENA, MOTOR_IN1, MOTOR_IN2);
 
 unsigned long lastNetworkUpdate;
 unsigned long lastPumpAction;
