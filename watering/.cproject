@@ -23,6 +23,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/watering/arduino/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/watering/Libraries/ITEADLIB_Arduino_WeeESP8266-master}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/watering/Libraries/DHT-sensor-library-master}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/watering/Libraries/U8glib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/watering/Libraries/U8glib/utility}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.cpp.sketch.input.1589192082" name="CPP source files" superClass="it.baeyens.arduino.compiler.cpp.sketch.input"/>
 							</tool>
@@ -32,6 +34,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/watering/arduino/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/watering/Libraries/ITEADLIB_Arduino_WeeESP8266-master}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/watering/Libraries/DHT-sensor-library-master}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/watering/Libraries/U8glib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/watering/Libraries/U8glib/utility}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.c.sketch.input.1822996459" name="C Source Files" superClass="it.baeyens.arduino.compiler.c.sketch.input"/>
 							</tool>

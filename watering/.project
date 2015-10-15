@@ -37,6 +37,11 @@
 			<locationURI>ArduinoPrivateLibPath/ITEADLIB_Arduino_WeeESP8266-master</locationURI>
 		</link>
 		<link>
+			<name>Libraries/U8glib</name>
+			<type>2</type>
+			<locationURI>ArduinoPrivateLibPath/U8glib</locationURI>
+		</link>
+		<link>
 			<name>arduino/core</name>
 			<type>2</type>
 			<locationURI>ArduinoPlatformPath/arduino</locationURI>
