@@ -14,6 +14,8 @@ Network network(RX_PIN, TX_PIN, NETWORK_ENABLE_PIN, Serial);
 
 Pump waterPump(MOTOR_ENA, MOTOR_IN1, MOTOR_IN2);
 
+//Display display();
+
 unsigned long lastNetworkUpdate;
 unsigned long lastPumpAction;
 
@@ -52,11 +54,13 @@ void loop() {
 	Serial.println(moisture);
 	
 	if(millis() - lastNetworkUpdate > NETWORK_UPDATE_INTERVAL) {
+		Serial.print("informing server");
 		informServer(h, t, moisture);
 		lastNetworkUpdate = millis();
 	}
 	
 	if(moisture < MOISTURE_THRESHOLD and (millis() - lastPumpAction) > MIN_PUMP_INTERVAL) {
+		Serial.print("Watering");
 		waterPump.giveWater(10);
 		lastPumpAction = millis();
 	}
@@ -70,7 +74,7 @@ void loop() {
 void informServer(float humidity, float temperature, float moisture) {
 	network.enable(); // this can take a while (needs to boot and reconnect to server)
 	network.connect(NETWORK_ADDRESS);
-	network.sendJson("{humidity:"+String(humidity, PRESENTATION_FLOAT_DECIMALS)+
+	network.send("{humidity:"+String(humidity, PRESENTATION_FLOAT_DECIMALS)+
 		",temperature:"+String(temperature, PRESENTATION_FLOAT_DECIMALS)+
 		",moisture:"+String(moisture, PRESENTATION_FLOAT_DECIMALS)+
 		"}");

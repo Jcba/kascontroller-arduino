@@ -18,6 +18,8 @@
 
 #include "ESP8266.h"
 
+#include "Configuration.h"
+
 class Network {
 public:
 	Network(uint8_t rx, uint8_t tx, uint8_t enable_pin, HardwareSerial serial);
@@ -29,8 +31,8 @@ public:
 	    is listening)
 	 */
 	void connect(String reciever);
-	/* sends a JSON string to the reciever */
-	void sendJson(String json);
+	/* sends a string to the reciever */
+	void send(String content);
 
 private:
 	uint8_t _rx; //rx pin

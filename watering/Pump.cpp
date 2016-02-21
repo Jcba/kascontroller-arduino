@@ -16,14 +16,16 @@ Pump::Pump(uint8_t pwm, uint8_t in1, uint8_t in2){
 }
 
 void Pump::giveWater(float amount){
+  Serial.print("Water");
 	unsigned long time = millis();
 	digitalWrite(_in1, HIGH);
 	digitalWrite(_in2, LOW);
-	analogWrite(_pwm, 200);
+	digitalWrite(_pwm, HIGH);
 	while(millis()-time < amount*1000);
+  Serial.print("Stop water");
 	digitalWrite(_in1, LOW);
 	digitalWrite(_in2, LOW);
-	analogWrite(_pwm, 0);
+	digitalWrite(_pwm, LOW);
 }
 
 
